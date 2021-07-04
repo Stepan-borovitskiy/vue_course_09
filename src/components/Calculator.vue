@@ -63,6 +63,7 @@
       <button
         v-for="key in keys"
         @click="calculate2(key)"
+        :value="key"
         :key="key"
         v-bind:title="key"
       >
@@ -163,9 +164,9 @@ export default {
     fib(n) {
       return n <= 1 ? n : this.fib(n - 1) + this.fib(n - 2);
     },
-    calculate2() {
-      let key = Event.target.value;
-      this.operand1 += key;
+    calculate2(item) {
+      let key = item.target.key;
+      this.operand1 += String(key);
     },
   },
   computed: {
