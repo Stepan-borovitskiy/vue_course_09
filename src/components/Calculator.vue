@@ -47,6 +47,29 @@
         {{ operand }}
       </button>
     </div>
+
+    <div>
+      <input
+        type="checkbox"
+        id="Keyboard1"
+        value="Отбразить клавиатуру"
+        v-model="checked"
+      />
+      <label for="Keyboard1">Отбразить клавиатуру</label>
+      <br />
+      <span v-if="checked">Отмеченные имена: {{ checked }}</span>
+    </div>
+    <div v-if="checked">
+      <button
+        v-for="key in keys"
+        @click="calculate2(key)"
+        :key="key"
+        v-bind:title="key"
+      >
+        {{ key }}
+      </button>
+    </div>
+
     <!--{{powWithOperand}}
         {{powSum}} -->
   </div>
@@ -59,14 +82,18 @@ export default {
     return {
       myCollection: [1, 2, 4, 4, 5],
       operands: ["+", "-", "/", "*", "**", "%"],
+      keys: ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "<-"],
       // text: "Some string",
       text1: "",
-      operand1: 0,
+      // operand1: 0,
+      operand1: "",
       operand2: 0,
       fibResult: 0,
       result: 0,
       error: "",
       logs: {},
+      checkedNames: [],
+      checked: false,
     };
   },
   // watch: {
@@ -136,6 +163,10 @@ export default {
     fib(n) {
       return n <= 1 ? n : this.fib(n - 1) + this.fib(n - 2);
     },
+    calculate2() {
+      let key = Event.target.value;
+      this.operand1 += key;
+    },
   },
   computed: {
     fib1() {
@@ -156,5 +187,8 @@ export default {
 <style scoped>
 .red {
   color: red;
+}
+.hide {
+  display: none;
 }
 </style>
