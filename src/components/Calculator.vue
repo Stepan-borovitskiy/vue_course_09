@@ -165,7 +165,7 @@ export default {
       return n <= 1 ? n : this.fib(n - 1) + this.fib(n - 2);
     },
     calculate2(item) {
-      let key = item.target.key;
+      let key = item;
       this.operand1 += String(key);
     },
   },
